@@ -1,22 +1,10 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" floating app src="https://img.elo7.com.br/product/zoom/37C1703/papel-de-parede-adesivo-hamburgueria-preto.jpg">
       <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
+        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact style="color: #f57f1f; font-family: Nunito, sans-serif; font-weight: bold; text-decoration: solid; ">
           <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon style="color: #f57f1f;">{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title v-text="item.title" />
@@ -24,40 +12,21 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
+    <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
+      <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
       <v-icon large style="margin: 5px; margin-top: -3px; color: #f57f1f;">
         mdi-food
       </v-icon>
-      <v-toolbar-title v-text="title" style="font-family: Quicksand, sans-serif; font-size: x-large;"/>
+      <v-toolbar-title v-text="title" style="font-family: Nunito, sans-serif; font-size: 40px; margin-bottom: 6px; margin-left: -1px"/>
       <v-spacer />
-        <v-btn
-          class="ma-2"
-          color="light-blue darken-4"
-          to="/registro"
-        >
-        <v-text>
-          REGISTRAR
-        </v-text>
+      <v-btn class="ma-2" color="orange darken-2" to="/registro">
+        CADASTRAR
       </v-btn>
-      <v-btn
-        class="ma-2"
-        color="light-blue darken-4"
-        to="/login"
-      >
-        <v-text>
-          ENTRAR
-        </v-text>
+      <v-btn class="ma-2" color="orange darken-2" to="/login">
+        ENTRAR
       </v-btn>
     </v-app-bar>
     <v-main>
@@ -71,20 +40,25 @@
 <script>
 export default {
   name: 'DefaultLayout',
-  data () {
+  data() {
     return {
       clipped: true,
-      drawer: false,
+      drawer: true,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
+          icon: 'mdi-view-dashboard',
+          title: 'Bem vindo!',
           to: '/'
         },
         {
-          icon: 'mdi-silverware-fork-knife',
-          title: 'Comidas',
+          icon: 'mdi-hamburger',
+          title: 'Produtos',
           to: '/store'
+        },
+        {
+          icon: 'mdi-information',
+          title: 'Sobre nós',
+          to: '/história'
         }
       ],
       miniVariant: false,
@@ -97,5 +71,5 @@ export default {
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Nunito');
 </style>
