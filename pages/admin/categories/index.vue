@@ -1,0 +1,104 @@
+<template>
+    <v-container>
+        <h1 style="font-family: Nunito, sans-serif; margin-left: 1%;">CONSULTA DE CATEGORIAS</h1>
+        <v-container>
+            <v-row>
+                <v-col>
+                    <v-btn color="orange darken-2">
+                        Procurar
+                    </v-btn>
+                    <v-btn
+                        color="orange darken-2"
+                        @click="toggleCadastro"
+                    >
+                        Nova categoria
+                    </v-btn>
+                </v-col>
+            </v-row>
+        </v-container>
+        <v-expand-transition>
+            <v-container v-if="cadastro" style="margin-bottom: -24px;">
+                <v-row>
+                    <v-col cols="11">
+                        <v-text-field
+                            solo
+                            placeholder="Nome nova categoria"
+                        >
+                        </v-text-field>
+                    </v-col>
+                    <v-col>
+                        <v-btn
+                            x-small
+                            height="48"
+                            width="48"
+                            color="orange darken-2"
+                            style="font-size: x-large; float:right">
+                            +
+                        </v-btn>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-expand-transition>
+        <v-container>
+            <v-data-table
+                :headers="headers"
+                :items-per-page="10"
+            >
+                <template v-slot:item.actions="{ item }">
+                    <v-icon
+                        small
+                        class="mr-2"
+                        @click="editar(item)"
+                    >
+                        mdi-pencil
+                    </v-icon>
+                    <v-icon
+                        small
+                        @click="deletar(item)"
+                    >
+                        mdi-delete
+                    </v-icon>
+                </template>
+            </v-data-table>
+        </v-container>
+    </v-container>
+</template>
+
+<script>
+export default {
+    name: 'AdminConsultaCategorias',
+    layout: 'admin',
+
+    data () {
+        return {
+            cadastro: false,
+            headers: [
+                {
+                    text: 'Código',
+                    align: 'center',
+                    sortable: false
+                },
+                {
+                    text: 'Nome',
+                    align: 'center',
+                    sortable: false
+                },
+                {
+                    text: 'Qtd. produtos',
+                    align: 'center',
+                    sortable: false
+                }
+            ]
+        }
+    },
+
+    methods: {
+        toggleCadastro () {
+            this.cadastro = !this.cadastro
+        }
+    }
+}
+</script>
+
+<style>
+</style>

@@ -1,123 +1,80 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" floating permanent expand-on-hover app
+      src="https://img.elo7.com.br/product/zoom/37C1703/papel-de-parede-adesivo-hamburgueria-preto.jpg"
+      style="border-radius: 14px; margin-left: 8px; margin-top: 8px; height: 90%;"
+      >
       <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
+        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact
+          style="color: white; font-family: Nunito, sans-serif; font-weight: bold">
           <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon style="color: #f57f1f;">{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title v-text="item.title" style="color: #f57f1f;" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
+    <v-app-bar :clipped-left="clipped" fixed app>
+      <v-icon large style="margin: 5px; margin-top: -3px; color: #f57f1f;">
+        mdi-food
+      </v-icon>
+      <v-toolbar-title v-text="title"
+        style="font-family: Nunito, sans-serif; font-size: 40px; margin-bottom: 6px; margin-left: -1px" />
+      <v-spacer/>
     </v-app-bar>
     <v-main>
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light>
-              mdi-repeat
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer
-      :absolute="!fixed"
-      app
-    >
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
 export default {
   name: 'DefaultLayout',
-  data () {
+  data() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
+      clipped: true,
+      drawer: true,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
+          icon: 'mdi-account-circle',
+          title: 'Clientes',
+          to: '/admin/customer'
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: 'mdi-hamburger',
+          title: 'Produtos',
+          to: '/admin/products'
         },
         {
-          icon: 'mdi-silverware-fork-knife',
-          title: 'Comidas',
-          to: '/store'
+          icon: 'mdi-package-variant-closed',
+          title: 'Pedidos',
+          to: '/admin/orders'
+        },
+        {
+          icon: 'mdi-format-list-group',
+          title: 'Categorias',
+          to: '/admin/categories'
+        },
+        {
+          icon: 'mdi-sale',
+          title: 'Descontos',
+          to: '/admin/discounts'
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js'
+      title: 'crstore'
     }
   }
 }
 </script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito');
+</style>
