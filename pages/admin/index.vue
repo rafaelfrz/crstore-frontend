@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    name: 'UserIndexAdmin',
+    name: 'IndexAdmin',
     layout: 'admin'
 }
 </script>

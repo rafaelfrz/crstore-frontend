@@ -29,7 +29,7 @@
       <v-btn class="ma-2" color="orange darken-2" to="/login">
         ENTRAR
       </v-btn>
-      <v-btn to="/admin">admin</v-btn>
+      <v-btn class="ma-2" to="/admin">admin</v-btn>
     </v-app-bar>
     <v-main>
       <v-container>

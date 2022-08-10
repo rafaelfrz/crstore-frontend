@@ -21,6 +21,7 @@
                 <v-row>
                     <v-col cols="11">
                         <v-text-field
+                            v-model="category.name"
                             solo
                             placeholder="Nome nova categoria"
                         >
@@ -32,7 +33,9 @@
                             height="48"
                             width="48"
                             color="orange darken-2"
-                            style="font-size: x-large; float:right">
+                            style="font-size: x-large; float:right"
+                            @click="newCategory"
+                            >
                             +
                         </v-btn>
                     </v-col>
@@ -42,19 +45,14 @@
         <v-container>
             <v-data-table
                 :headers="headers"
+                :items="categories.data"
                 :items-per-page="10"
+                class="elevation-1"
             >
                 <template v-slot:item.actions="{ item }">
                     <v-icon
                         small
-                        class="mr-2"
-                        @click="editar(item)"
-                    >
-                        mdi-pencil
-                    </v-icon>
-                    <v-icon
-                        small
-                        @click="deletar(item)"
+                        @click="destroy(item)"
                     >
                         mdi-delete
                     </v-icon>
@@ -71,31 +69,78 @@ export default {
 
     data () {
         return {
+            category: {
+                name: ''
+            },
             cadastro: false,
             headers: [
                 {
                     text: 'Código',
                     align: 'center',
-                    sortable: false
+                    sortable: false,
+                    value: 'id'
                 },
                 {
                     text: 'Nome',
                     align: 'center',
-                    sortable: false
+                    sortable: false,
+                    value: 'name'
                 },
                 {
                     text: 'Qtd. produtos',
                     align: 'center',
                     sortable: false
-                }
-            ]
+                },
+                { text: "", value: "actions" }
+            ],
+            categories: []
         }
+    },
+
+    created () {
+        this.getCategories();
     },
 
     methods: {
         toggleCadastro () {
             this.cadastro = !this.cadastro
+        },
+
+        async getCategories () {
+            this.categories = await this.$api.get('/categories')
+        },
+
+        async newCategory () {
+            try {
+                let category = {
+                    name: this.category.name
+                };
+                console.log(category);
+                let response = await this.$api.post('/categories', category);
+                console.log(response);
+                if (response.type !== 'success') {
+                    return this.$toast.error(response.message)
+                }
+                this.$toast.success(response.message);
+                this.getCategories ();
+                this.toggleCadastro();
+            } catch (error) {
+                this.$toast.error(error.message);
+            }
+        },
+
+        async destroy(category) {
+            try {
+                if(confirm('Deseja deletar a categoria?')) {
+                    let response = await this.$api.post('/categories/destroy', {id: category.id})
+                    this.$toast.success(response.message);
+                    this.getCategories();
+                }
+            } catch (error) {
+                this.$toast.error(response.message)
+            }
         }
+
     }
 }
 </script>

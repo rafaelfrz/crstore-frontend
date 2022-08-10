@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <h1 style="font-family: Nunito, sans-serif; margin-left: 1%;">CONSULTA DE CLIENTES</h1>
+        <h1 style="font-family: Nunito, sans-serif; margin-left: 1%;">CONSULTA DE PEDIDOS</h1>
         <v-container>
             <v-row>
                 <v-col>
@@ -49,27 +49,17 @@ export default {
                     sortable: false
                 },
                 {
-                    text: 'Nome',
+                    text: 'Cliente',
                     align: 'center',
                     sortable: false
                 },
                 {
-                    text: 'Email',
-                    align: 'center',
-                    sortable: false
-                },
-                                {
-                    text: 'Apelido',
-                    align: 'center',
-                    sortable: false
-                },
-                                {
-                    text: 'CPF',
+                    text: 'Status',
                     align: 'center',
                     sortable: false
                 },
                 {
-                    text: 'Telefone',
+                    text: 'Endereço',
                     align: 'center',
                     sortable: false
                 },

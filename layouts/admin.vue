@@ -64,6 +64,11 @@ export default {
           icon: 'mdi-sale',
           title: 'Descontos',
           to: '/admin/discounts'
+        },
+        {
+          icon: 'mdi-google-maps',
+          title: 'Endereços',
+          to: '/admin/endecosclientes'
         }
       ],
       miniVariant: false,

@@ -30,7 +30,7 @@
                     >
                         <v-row>
                             <v-text-field
-                                v-model="email"
+                                v-model="user.email"
                                 solo
                                 placeholder="Email"
                                 prepend-inner-icon="mdi-at"
@@ -41,7 +41,7 @@
                         </v-row>
                         <v-row>
                             <v-text-field
-                                v-model="username"
+                                v-model="user.username"
                                 solo
                                 placeholder="Username"
                                 prepend-inner-icon="mdi-account"
@@ -63,7 +63,8 @@
                         </v-row>
                         <v-row>
                             <v-text-field
-                                v-model="password"
+                                v-model="user.password"
+                                :rules="[rules.password]"
                                 solo
                                 placeholder="Senha"
                                 prepend-inner-icon="mdi-lock"
@@ -80,12 +81,17 @@
                                     *
                                     </p>
                                 </template>
-                                <span>Necessário: <br>- Acima de 8 caracteres <br>- Número <br>- Caracter especial (@#$%) </span>
+                                <span>Necessário:
+                                    <br>- Acima de 8 caracteres 
+                                    <br>- Número 
+                                    <br>- Caracter especial (@#$%) 
+                                </span>
                             </v-tooltip>
                         </v-row>
                         <v-row>
                             <v-text-field
-                                v-model="passwordMatch"
+                                v-model="user.passwordMatch"
+                                :rules="[rules.passwordMatch]"
                                 solo
                                 placeholder="Repita a senha"
                                 prepend-inner-icon="mdi-lock"
@@ -100,6 +106,7 @@
                                 color="yellow darken-4"
                                 large
                                 block
+                                @click="register"
                             >
                                 REGISTRAR-SE
                             </v-btn>
@@ -163,11 +170,6 @@ export default {
                 password: '',
                 passwordMatch: '',
             },
-            necessary: {
-                email: '',
-                usarname: '',
-                password: '',
-            },
             rules: {
                 required: value => !!value || 'Esse campo é obrigatório',
                 email: value => {
@@ -184,6 +186,31 @@ export default {
                 },
                 passwordMatch: value => value === this.user.password || 'As senhas devem ser iguais'
             },
+        }
+    },
+
+    methods: {
+        async register () {
+            try {
+            let user = {
+                email: this.user.email,
+                password: this.user.password,
+                username: this.user.username,
+            };
+            let response = await this.$api.post('/users/register', user);
+            console.log(response)
+            if (response.type !== 'success') {
+                return this.$toast.error(response.message);
+            }
+            this.$toast.success(response.message)
+            this.$router.push('/');
+            } catch (error) {
+                this.$toast.error(response.message)
+            }
+        },
+
+        async emailInUse () {
+            
         }
     }
 }
