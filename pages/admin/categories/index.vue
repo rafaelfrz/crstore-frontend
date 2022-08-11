@@ -115,9 +115,7 @@ export default {
                 let category = {
                     name: this.category.name
                 };
-                console.log(category);
                 let response = await this.$api.post('/categories', category);
-                console.log(response);
                 if (response.type !== 'success') {
                     return this.$toast.error(response.message)
                 }

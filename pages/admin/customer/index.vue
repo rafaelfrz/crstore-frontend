@@ -46,34 +46,51 @@ export default {
                 {
                     text: 'Código',
                     align: 'center',
-                    sortable: false
+                    sortable: false,
+                    value: 'id'
                 },
                 {
                     text: 'Nome',
                     align: 'center',
-                    sortable: false
+                    sortable: false,
+                    value: 'name'
                 },
                 {
                     text: 'Email',
                     align: 'center',
-                    sortable: false
+                    sortable: false,
+                    value: 'email'
                 },
-                                {
+                {
                     text: 'Apelido',
                     align: 'center',
-                    sortable: false
+                    sortable: false,
+                    value: 'username'
                 },
-                                {
+                {
                     text: 'CPF',
                     align: 'center',
-                    sortable: false
+                    sortable: false,
+                    value: 'cpfcnpj'
                 },
                 {
                     text: 'Telefone',
                     align: 'center',
-                    sortable: false
+                    sortable: false,
+                    value: 'phone'
                 },
-            ]
+            ],
+            customers: []
+        }
+    },
+
+    created () {
+      this.getCustomers();
+    },
+
+    methods: {
+      async getCategories() {
+          this.customers = await this.$api.get('/users')
         }
     }
 }
