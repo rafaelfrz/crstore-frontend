@@ -108,6 +108,7 @@ export default {
 
         async getCategories () {
             this.categories = await this.$api.get('/categories')
+            console.log(this.categories);
         },
 
         async newCategory () {
@@ -138,7 +139,6 @@ export default {
                 this.$toast.error(response.message)
             }
         }
-
     }
 }
 </script>

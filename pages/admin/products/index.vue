@@ -19,7 +19,9 @@
         <v-container>
             <v-data-table
                 :headers="headers"
+                :items="products.data"
                 :items-per-page="10"
+                class="elevation-1"
             >
                 <template v-slot:item.actions="{ item }">
                     <v-icon
@@ -31,7 +33,7 @@
                     </v-icon>
                     <v-icon
                         small
-                        @click="deletar(item)"
+                        @click="destroy(item)"
                     >
                         mdi-delete
                     </v-icon>
@@ -52,19 +54,46 @@ export default {
                 {
                     text: 'Código',
                     align: 'center',
-                    sortable: false
+                    sortable: false,
+                    value: 'id'
                 },
                 {
                     text: 'Nome',
                     align: 'center',
-                    sortable: false
+                    sortable: false,
+                    value: 'name'
                 },
                 {
                     text: 'Categoria',
                     align: 'center',
-                    sortable: false
+                    sortable: false,
+                    value: 'idCategory'
+                },
+                { text: "", value: "actions" }
+            ],
+            products: []
+        }
+    },
+
+    created () {
+        this.getProducts()
+    },
+
+    methods: {
+        async getProducts() {
+            this.products = await this.$api.get('/products')
+        },
+
+        async destroy(products) {
+            try {
+                if(confirm('Deseja deletar o produto?')) {
+                    let response = await this.$api.post('/products/destroy', {id: products.id})
+                    this.$toast.success(response.message);
+                    this.getProducts();
                 }
-            ]
+            } catch (error) {
+                this.$toast.error(response.message)
+            }
         }
     }
 }

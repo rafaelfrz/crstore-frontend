@@ -126,7 +126,7 @@ export default {
           password: this.password
         };
         console.log(user)
-        let response = await this.$api.post('/user/login', user);
+        let response = await this.$api.post('/users/login', user);
         if (response.type !== 'success') {
           return this.$toast.error(response.message);
         }

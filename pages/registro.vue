@@ -192,18 +192,18 @@ export default {
     methods: {
         async register () {
             try {
-            let user = {
-                email: this.user.email,
-                password: this.user.password,
-                username: this.user.username,
-            };
-            let response = await this.$api.post('/users/register', user);
-            console.log(response)
-            if (response.type !== 'success') {
-                return this.$toast.error(response.message);
-            }
-            this.$toast.success(response.message)
-            this.$router.push('/');
+                let user = {
+                    email: this.user.email,
+                    password: this.user.password,
+                    username: this.user.username,
+                };
+                let response = await this.$api.post('/users/register', user);
+                console.log(response)
+                if (response.type !== 'success') {
+                    return this.$toast.error(response.message);
+                }
+                this.$toast.success(response.message)
+                this.$router.push('/');
             } catch (error) {
                 this.$toast.error(response.message)
             }

@@ -65,16 +65,28 @@ export default {
           title: 'Descontos',
           to: '/admin/discounts'
         },
-        {
-          icon: 'mdi-google-maps',
-          title: 'Endereços',
-          to: '/admin/endecosclientes'
-        }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'crstore'
+    }
+  },
+
+  async created () {
+    await this.validateLogin();
+  },
+
+  methods: {
+    async validateLogin () {
+      const token = localStorage.getItem('crstore-api-token') || '';
+      let response = await this.$axios.$get('http://localhost:3333/users/validate-token', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (response.type !== 'success' || response.data?.role !== 'admin') {
+        this.$toast.info('Você não tem permissão para acessar esse recurso');
+        return this.$router.push({ name: 'index' });
+      } 
     }
   }
 }

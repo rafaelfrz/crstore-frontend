@@ -13,21 +13,16 @@
         <v-container>
             <v-data-table
                 :headers="headers"
+                :items="customers.data"
                 :items-per-page="10"
+                class="elevation-1"
             >
                 <template v-slot:item.actions="{ item }">
                     <v-icon
                         small
                         class="mr-2"
-                        @click="editar(item)"
+                        @click="view(item)"
                     >
-                        mdi-pencil
-                    </v-icon>
-                    <v-icon
-                        small
-                        @click="deletar(item)"
-                    >
-                        mdi-delete
                     </v-icon>
                 </template>
             </v-data-table>
@@ -79,18 +74,19 @@ export default {
                     sortable: false,
                     value: 'phone'
                 },
+                { text: "", value: "actions" }
             ],
             customers: []
         }
     },
 
     created () {
-      this.getCustomers();
+        this.getCustomers();
     },
 
     methods: {
-      async getCategories() {
-          this.customers = await this.$api.get('/users')
+        async getCustomers() {
+            this.customers = await this.$api.get('/users')
         }
     }
 }

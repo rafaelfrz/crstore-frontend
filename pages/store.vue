@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-container>
-            
+          <h1 style="font-family: Nunito, sans-serif;">PRODUTOS</h1>
         </v-container>
         <hr>
         <v-row style="margin-top: 2%">
