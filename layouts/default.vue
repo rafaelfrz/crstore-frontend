@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" floating permanent expand-on-hover app
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" floating expand-on-hover app
       src="https://img.elo7.com.br/product/zoom/37C1703/papel-de-parede-adesivo-hamburgueria-preto.jpg"
       style="border-radius: 14px; margin-left: 8px; margin-top: 8px; height: 90%;"
       >
@@ -63,7 +63,7 @@ export default {
           to: '/história'
         }
       ],
-      miniVariant: false,
+      miniVariant: true,
       right: true,
       rightDrawer: false,
       title: 'crstore'

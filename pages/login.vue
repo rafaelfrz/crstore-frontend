@@ -125,14 +125,14 @@ export default {
           email: this.email,
           password: this.password
         };
-        console.log(user)
         let response = await this.$api.post('/users/login', user);
         if (response.type !== 'success') {
           return this.$toast.error(response.message);
         }
         this.$toast.success(response.message);
         localStorage.setItem('crstore-api-token', response.token)
-        this.$router.push("/")
+        const route = response.role === 'admin' ? 'admin' : 'store';
+        this.$router.push(route)
       } catch {
         this.$toast.error(response.data.message)
       }

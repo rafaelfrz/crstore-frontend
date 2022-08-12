@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" floating permanent expand-on-hover app
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" floating expand-on-hover app
       src="https://img.elo7.com.br/product/zoom/37C1703/papel-de-parede-adesivo-hamburgueria-preto.jpg"
       style="border-radius: 14px; margin-left: 8px; margin-top: 8px; height: 90%;"
       >
@@ -66,29 +66,29 @@ export default {
           to: '/admin/discounts'
         },
       ],
-      miniVariant: false,
+      miniVariant: true,
       right: true,
       rightDrawer: false,
       title: 'crstore'
     }
   },
 
-  async created () {
-    await this.validateLogin();
-  },
+  // async created () {
+  //   await this.validateLogin();
+  // },
 
-  methods: {
-    async validateLogin () {
-      const token = localStorage.getItem('crstore-api-token') || '';
-      let response = await this.$axios.$get('http://localhost:3333/users/validate-token', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (response.type !== 'success' || response.data?.role !== 'admin') {
-        this.$toast.info('Você não tem permissão para acessar esse recurso');
-        return this.$router.push({ name: 'index' });
-      } 
-    }
-  }
+  // methods: {
+  //   async validateLogin () {
+  //     const token = localStorage.getItem('crstore-api-token') || '';
+  //     let response = await this.$axios.$get('http://localhost:3333/users/validate-token', {
+  //       headers: { Authorization: `Bearer ${token}` }
+  //     });
+  //     if (response.type !== 'success' || response.data?.role !== 'admin') {
+  //       this.$toast.info('Você não tem permissão para acessar esse recurso');
+  //       return this.$router.push({ name: 'index' });
+  //     } 
+  //   }
+  // }
 }
 </script>
 
